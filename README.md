@@ -77,14 +77,3 @@ Confidence score displayed on the frame
 Example:
 
 Rock (0.81)
-
-
-
-
-
-
-
-
-
-
-Sollu 😄
