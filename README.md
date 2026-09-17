@@ -1,21 +1,27 @@
 # YOLO Rock Detection
 
-A real-time rock detection system using **Ultralytics YOLO** and **OpenCV**. The trained model detects rocks/stones from a live webcam feed and displays bounding boxes around detected objects.
+A real-time rock detection project using **Ultralytics YOLO** and **OpenCV**. The trained YOLO model detects rocks from a live camera feed and displays bounding boxes with confidence scores.
 
-## Project Description
+## Features
 
-* **Task:** Object Detection
-* **Model:** Ultralytics YOLO
-* **Classes:** Rock/Stone
-* **Input:** Live webcam feed
-* **Output:** Bounding boxes with detection results
+* Real-time rock detection
+* Live webcam input
+* YOLO-based object detection
+* Bounding boxes around detected rocks
+* Detection confidence scores
+* Single-class rock detection
 
-The project focuses on detecting the presence and location of rocks rather than classifying different rock types.
+## Technologies Used
+
+* Python 3
+* Ultralytics YOLO
+* OpenCV
+* YOLO Object Detection
 
 ## Project Structure
 
 ```text
-Rock-Detection/
+Rock-Detection-/
 ├── README.md
 ├── auto_label.py
 └── best.pt
@@ -26,59 +32,62 @@ Rock-Detection/
 ```text
 Webcam
    ↓
-OpenCV captures frame
+OpenCV
    ↓
-YOLO model
+Capture Video Frame
    ↓
-Rock detection
+YOLO Model
    ↓
-Bounding box
+Rock Detection
    ↓
-Live display
+Bounding Box + Confidence
+   ↓
+Display Detection
 ```
 
-The trained YOLO model processes each frame from the webcam. When a rock is detected, a bounding box is drawn around the detected object.
-
-## Technologies Used
-
-* Python
-* Ultralytics YOLO
-* OpenCV
-* YOLO Object Detection
+The webcam captures live video frames using OpenCV. Each frame is passed to the trained YOLO model, which detects rocks and draws bounding boxes around the detected objects.
 
 ## Model
 
-The trained model is stored as:
+The trained YOLO model is stored in:
 
 ```text
 best.pt
 ```
 
-The model is loaded using Ultralytics:
-
-```python
-from ultralytics import YOLO
-
-model = YOLO("best.pt")
-```
+The model is loaded using the **Ultralytics YOLO** framework.
 
 ## Installation
 
-Install the required Python packages:
+Clone the repository:
+
+```bash
+git clone https://github.com/vigneesh-22/Rock-Detection-.git
+```
+
+Move into the project directory:
+
+```bash
+cd Rock-Detection-
+```
+
+Install the required dependencies:
 
 ```bash
 pip install ultralytics opencv-python
 ```
 
+> It is recommended to use a Python virtual environment when installing the dependencies.
+
 ## Run the Project
 
-Run:
+Run the detection program:
 
 ```bash
 python3 auto_label.py
 ```
 
-The program opens the default webcam and performs real-time rock detection.
+The program will access the default webcam and perform real-time rock detection.
 
 Press:
 
@@ -86,38 +95,47 @@ Press:
 q
 ```
 
-to stop the detection window.
+to exit the detection window.
 
-## Detection
+## Output
 
-The program:
+When a rock is detected, the model displays a bounding box around it along with the detection confidence.
 
-1. Opens the default webcam.
-2. Captures video frames using OpenCV.
-3. Sends each frame to the YOLO model.
-4. Detects rocks/stones.
-5. Draws bounding boxes around detected objects.
-6. Displays the live detection result.
+Example:
+
+```text
+Rock (0.81)
+```
+
+Here, `0.81` represents the model's detection confidence.
 
 ## Applications
 
-This type of rock detection can be useful for:
+This project can be used as a basic computer vision component for:
 
-* Rover applications
 * Robotics
+* Rover applications
 * Terrain analysis
 * Obstacle detection
 * Autonomous exploration
+* Mining and underground robotics
 
 ## Future Improvements
 
-* Improve detection accuracy with a larger dataset
-* Add support for rover-mounted cameras
-* Integrate the detector with ROS 2
-* Deploy the model on an edge device
+* Improve detection accuracy using a larger dataset
+* Support rover-mounted cameras
+* Integrate with ROS 2
 * Use detections for rover navigation
-* Optimize inference for real-time embedded systems
+* Deploy the model on an edge device
+* Optimize the model for real-time embedded systems
 
 ## Learning Purpose
 
-This project was developed as a hands-on learning project in **computer vision, YOLO object detection, OpenCV, model inference, and robotics applications**.
+This project was developed as a hands-on learning project to understand:
+
+* YOLO object detection
+* Computer vision
+* OpenCV
+* Model inference
+* Real-time camera processing
+* AI applications in robotics
