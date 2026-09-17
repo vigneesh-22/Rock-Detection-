@@ -1,98 +1,84 @@
 # YOLO Rock Detection
 
-A real-time rock detection system using **Ultralytics YOLO** and a custom single-class dataset. The system detects the presence and location of rocks in images and live camera feeds using bounding boxes and confidence scores.
+A real-time rock detection system using **Ultralytics YOLO** and **OpenCV**. The trained model detects rocks/stones from a live webcam feed and displays bounding boxes around detected objects.
 
 ## Project Description
 
 * **Task:** Object Detection
 * **Model:** Ultralytics YOLO
-* **Classes:** 1 — Rock
-* **Input:** Images / Live Camera Feed
-* **Output:** Bounding boxes with confidence scores
+* **Classes:** Rock/Stone
+* **Input:** Live webcam feed
+* **Output:** Bounding boxes with detection results
 
-This project focuses on detecting rocks rather than classifying different rock types.
+The project focuses on detecting the presence and location of rocks rather than classifying different rock types.
 
-## Methodology
-
-The YOLO model is trained using a custom dataset containing a single class: `rock`.
-
-During training, the model learns visual features such as:
-
-* Shape
-* Texture
-* Surface patterns
-* Visual appearance
-
-During inference, YOLO predicts:
-
-1. Bounding box coordinates
-2. Detection confidence
-
-The resulting detections can be used for real-time rock detection in robotics and rover applications.
-
-## Dataset Structure
+## Project Structure
 
 ```text
-yolo_dataset/
-├── images/
-│   ├── train/
-│   └── val/
-├── labels/
-│   ├── train/
-│   └── val/
-└── data.yaml
+Rock-Detection/
+├── README.md
+├── auto_label.py
+└── best.pt
 ```
 
-The images were collected using a webcam and/or rover-mounted camera.
-
-Rocks were manually annotated using bounding boxes following the YOLO annotation format.
-
-## YOLO Label Format
-
-Each rock annotation follows the YOLO format:
+## How It Works
 
 ```text
-class_id center_x center_y width height
+Webcam
+   ↓
+OpenCV captures frame
+   ↓
+YOLO model
+   ↓
+Rock detection
+   ↓
+Bounding box
+   ↓
+Live display
 ```
 
-All coordinates are normalized between `0` and `1`.
+The trained YOLO model processes each frame from the webcam. When a rock is detected, a bounding box is drawn around the detected object.
 
-Since this project contains only one class:
+## Technologies Used
+
+* Python
+* Ultralytics YOLO
+* OpenCV
+* YOLO Object Detection
+
+## Model
+
+The trained model is stored as:
 
 ```text
-0 = rock
+best.pt
 ```
 
-## Model Training
+The model is loaded using Ultralytics:
 
-* **Framework:** Ultralytics YOLO
-* **Task:** Object Detection
-* **Number of Classes:** 1
-* **Class:** Rock
+```python
+from ultralytics import YOLO
 
-### Trained Model
-
-```text
-yolo_rock_detector.pt
+model = YOLO("best.pt")
 ```
 
 ## Installation
 
-Install the required dependencies:
+Install the required Python packages:
 
 ```bash
 pip install ultralytics opencv-python
 ```
 
-## Run Detection
+## Run the Project
 
-Run the detection program:
+Run:
 
 ```bash
-python detect_rock.py
+python3 auto_label.py
 ```
 
-The program can perform detection using a live camera feed.
+The program opens the default webcam and performs real-time rock detection.
 
 Press:
 
@@ -100,44 +86,38 @@ Press:
 q
 ```
 
-to exit the camera window.
+to stop the detection window.
 
-## Output
+## Detection
 
-The system displays:
+The program:
 
-* Bounding boxes around detected rocks
-* Confidence score for each detection
-* Real-time camera output
-
-Example:
-
-```text
-Rock (0.81)
-```
-
-where `0.81` represents the model's confidence score for the detected rock.
+1. Opens the default webcam.
+2. Captures video frames using OpenCV.
+3. Sends each frame to the YOLO model.
+4. Detects rocks/stones.
+5. Draws bounding boxes around detected objects.
+6. Displays the live detection result.
 
 ## Applications
 
-This rock detection system can be useful for:
+This type of rock detection can be useful for:
 
-* Rover navigation
-* Robotic exploration
+* Rover applications
+* Robotics
 * Terrain analysis
 * Obstacle detection
-* Underground/mining robotics
-* Autonomous robotic systems
+* Autonomous exploration
 
 ## Future Improvements
 
-* Detect multiple rock classes
 * Improve detection accuracy with a larger dataset
+* Add support for rover-mounted cameras
+* Integrate the detector with ROS 2
 * Deploy the model on an edge device
-* Integrate detection with ROS 2
-* Use detected rocks for rover navigation and obstacle avoidance
-* Optimize the model for real-time embedded deployment
+* Use detections for rover navigation
+* Optimize inference for real-time embedded systems
 
 ## Learning Purpose
 
-This project was developed as a hands-on learning project for computer vision, object detection, dataset annotation, YOLO model training, and real-time inference.
+This project was developed as a hands-on learning project in **computer vision, YOLO object detection, OpenCV, model inference, and robotics applications**.
